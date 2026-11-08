@@ -10,6 +10,14 @@ Backend: `cd backend && pip install -r requirements.txt && uvicorn app.main:app 
 Tests: `cd backend && pytest -q`
 Frontend: `cd frontend && npm install && npm run dev`
 
-Copy `backend/.env.example` to `backend/.env`. SQLite is the local default; Render uses PostgreSQL through `DATABASE_URL`.
+Copy `backend/.env.example` to `backend/.env`. SQLite is the local default. Railway PostgreSQL should be attached to the backend service using the `DATABASE_URL` variable reference.
 
-A Render blueprint is provided in `render.yaml`. Deployment has not been performed.
+## Railway deployment
+This is a monorepo with two Railway services:
+
+1. **API service**: create a service from this repository, set its Root Directory to `/backend`, and use the included `backend/railway.json` configuration. Set `ENVIRONMENT=production`, `CORS_ORIGINS` to the deployed frontend origin, and `DATABASE_URL` to `${{Postgres.DATABASE_URL}}` after adding a Railway PostgreSQL service.
+2. **Web service**: create a second service from the same repository, set its Root Directory to `/frontend`, and use `frontend/railway.json`. Set `NEXT_PUBLIC_API_URL` to the public API URL (including `/api/v1` only if the frontend expects that prefix).
+3. Add a Railway PostgreSQL database and reference its connection string from the API service. Keep secrets in Railway variables, never in Git.
+4. Generate public domains for the API and web services, then verify `/api/v1/health` and the dashboard.
+
+Railway configuration files are included, but no Railway project, services, database, domain, or deployment has been created or verified yet. Review Railway's current resource pricing before provisioning.
