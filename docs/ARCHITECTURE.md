@@ -8,4 +8,4 @@ MVP is a modular monolith: Next.js frontend, FastAPI backend, SQLAlchemy persist
 - Agent to tools: allow-listed tools only; no arbitrary code execution.
 - Agent to external platform: disabled until permission, policy and human approval checks pass.
 
-Render blueprint is provided at repository root. Production secrets belong in Render environment settings, never in Git.
+Railway hosts the API, frontend, and PostgreSQL as separate services in one project. Each application service has its own Railway configuration under its service root directory. Production secrets belong in Railway service variables, never in Git.
