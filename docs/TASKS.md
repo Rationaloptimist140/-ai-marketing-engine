@@ -1,7 +1,7 @@
 # Implementation Tasks
 
 ## Milestone 0 — Foundation
-- [x] Monorepo, FastAPI, SQLAlchemy models, workspace/campaign API, eight-agent registry/prompts, Next.js shell, Render blueprint, backend tests.
+- [x] Monorepo, FastAPI, SQLAlchemy models, workspace/campaign API, eight-agent registry/prompts, Next.js shell, Railway service configuration, backend tests.
 - [ ] Authentication and workspace membership enforcement.
 - [ ] Alembic migrations.
 
